@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .box {
+            background-color: beige;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+        }
+        .special {
+            background-color: orange;
+        }
+        .btns {
+            float:right;
+            position: fixed;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="btns">
+        <button class="btn1">Scroll by 100px(y)</button>
+        <button class="btn2">Scroll to 100px(y)</button>
+        <button class="btn3">Scroll into special</button>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box special"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        const special = document.querySelector('.special');
+        special.addEventListener('click', event => {
+            const rect = special.getBoundingClientRect();
+            console.log(rect);
+            console.log(`client: ${event.clientX}, ${event.clientY}`);
+            console.log(`page: ${event.pageX}, ${event.pageY}`);
+        })
+
+        const btn1 = document.querySelector('.btn1');
+        const btn2 = document.querySelector('.btn2');
+        const btn3 = document.querySelector('.btn3');
+        btn1.addEventListener('click', e => {
+            window.scrollBy({
+                top: 100,
+                behavior:"smooth"  
+            });
+        });
+        btn2.addEventListener('click', e => {
+            window.scrollTo({
+                top:100,
+                behavior:"smooth"
+            });
+        });
+        btn3.addEventListener('click', e => {
+            const lo = special.offsetTop;
+            window.scrollTo({
+                top: lo,
+                behavior:"smooth"
+            })
+        })
+    </script>
+</body>
+</html>

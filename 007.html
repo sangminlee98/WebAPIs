@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: black;
+        }
+        #pos {
+            position: absolute;
+            color: white;
+        }
+        #target {
+            position: absolute;
+            width: 100px;
+            transform: translate(-50%,-50%);
+        }
+        .line {
+            position: absolute;
+            background-color: white;
+        }
+        .horizontal {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+        }
+        .vertical {
+            height: 100%;
+            width: 1px;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="line horizontal"></div>
+    <div class="line vertical"></div>
+    <p id="pos"></p>
+    <img id="target" src="./img/target.png" alt="img">
+    <script>
+        const pos = document.querySelector('#pos');
+        const target = document.querySelector('#target');
+        const ho = document.querySelector('.horizontal');
+        const ve = document.querySelector('.vertical')
+        document.addEventListener('mousemove', e => {
+            let cursorX = e.clientX;
+            let cursorY = e.clientY;
+            pos.innerHTML = `${cursorX}, ${cursorY}`;
+            target.style.left = cursorX+'px';
+            target.style.top = cursorY+'px';
+            pos.style.left = cursorX+20+'px';
+            pos.style.top = cursorY+10+'px';
+            ho.style.top = cursorY+'px';
+            ve.style.left = cursorX+'px';
+        })
+    </script>
+</body>
+</html>
