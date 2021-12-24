@@ -20,7 +20,6 @@
         #target {
             position: absolute;
             width: 100px;
-            transform: translate(-50%,-50%);
         }
         .line {
             position: absolute;
@@ -29,12 +28,10 @@
         .horizontal {
             width: 100%;
             height: 1px;
-            top: 50%;
         }
         .vertical {
             height: 100%;
             width: 1px;
-            left: 50%;
         }
     </style>
 </head>
@@ -44,21 +41,26 @@
     <p id="pos"></p>
     <img id="target" src="./img/target.png" alt="img">
     <script>
-        const pos = document.querySelector('#pos');
-        const target = document.querySelector('#target');
-        const ho = document.querySelector('.horizontal');
-        const ve = document.querySelector('.vertical')
-        document.addEventListener('mousemove', e => {
-            let cursorX = e.clientX;
-            let cursorY = e.clientY;
-            pos.innerHTML = `${cursorX}, ${cursorY}`;
-            target.style.left = cursorX+'px';
-            target.style.top = cursorY+'px';
-            pos.style.left = cursorX+20+'px';
-            pos.style.top = cursorY+10+'px';
-            ho.style.top = cursorY+'px';
-            ve.style.left = cursorX+'px';
+        addEventListener('load', () => {
+            const pos = document.querySelector('#pos');
+            const target = document.querySelector('#target');
+            const ho = document.querySelector('.horizontal');
+            const ve = document.querySelector('.vertical');
+            const targetRect = target.getBoundingClientRect();
+            console.log(targetRect);
+            const targetHalfWidth = targetRect.width / 2;
+            const targetHalfHeight = targetRect.height / 2;
+            document.addEventListener('mousemove', e => {
+                const cursorX = e.clientX;
+                const cursorY = e.clientY;
+                pos.innerHTML = `${cursorX}, ${cursorY}`;
+                target.style.transform =`translate(${cursorX - targetHalfWidth}px, ${cursorY - targetHalfHeight}px)`;
+                pos.style.transform = `translate(${cursorX+30}px, ${cursorY+20}px)`;
+                ho.style.transform =`translateY(${cursorY}px)`;
+                ve.style.transform =`translateX(${cursorX}px)`;
+            })
         })
+        
     </script>
 </body>
 </html>
